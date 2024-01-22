@@ -1,11 +1,15 @@
 import React from "react";
+import HeroSection from "./components/HeroSection";
 
-function About(){
+const About = () => {
+
+    const data ={
+        name : "ShopNest Ecommerce",
+    };
+
     return(
-        <div>
-            <h1>About</h1>
-        </div>
+        <HeroSection myData={data} />
     )
-}
+};
 
 export default About;
