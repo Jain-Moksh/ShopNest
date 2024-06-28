@@ -10,16 +10,17 @@ import Error from "./Error";
 import { GlobalStyle } from "./GlobalStyle";
 import { ThemeProvider } from "styled-components";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 const App = () => {
-  const theme = {
+
+  const myTheme = {
     colors: {
       heading: "rgb(24 24 29)",
       text: "rgba(29 ,29, 29, .8)",
       white: "#fff",
       black: " #212529",
       helper: "#8490ff",
-
       bg: "#F6F8FA",
       footer_bg: "#0a1435",
       btn: "rgb(98 84 243)",
@@ -38,7 +39,7 @@ const App = () => {
   };
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={myTheme}>
       <Router>
         <GlobalStyle />
         <Header />
@@ -51,6 +52,7 @@ const App = () => {
           <Route path="/cart" element={<Cart />} />
           <Route path="*" element={<Error />} />
         </Routes>
+        <Footer />
       </Router>
     </ThemeProvider>
   );

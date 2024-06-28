@@ -9,7 +9,6 @@ const Header = () =>{
             <NavLink to="/">
                 <img src="./images/logo.png" alt="my logo img" />
             </NavLink>
-
             <Nav />                        
         </MainHeader>
     );
