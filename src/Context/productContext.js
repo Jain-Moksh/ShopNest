@@ -1,36 +1,64 @@
-// 3 parts of context API
 
-import { createContext, useContext, useEffect } from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 import axios from "axios";
+import reducer from '../reducer/productReducer';
 
-// create context 
-// provider 
-// consumer => useContext hook
 
 // creating context
 const AppContext = createContext();
 
+// assigning api link to api variable
 const API = 'https://api.pujakaitem.com/api/products';
 
+// defining the initial state of the useReducer Hook 
+const initialState = {
+    isLoading: false,
+    isError: false,
+    products: [],
+    featureProducts: [],
+};
+
+// defining the provider of the context api = AppContext 
 const AppProvider = ({ children }) => {
 
-    const getProducts = async(url) => {
-        const res = await axios.get(url);
-        const products = await res.data;
+    // declaring useReducer hook whose reducer function is defined in ProductReducer.js file
+    // Its initialState is defined above 
+    // it is use to handle all the products
+    const [state, dispatch] = useReducer(reducer, initialState);
+
+    // used axios with async/await to fetch the api of products
+    const getProducts = async (url) => {
+
+        dispatch({ type: 'SET_LOADING' });
+
+        try {
+            // here res contains all the information of api including unnesecary
+            // here products has only the product information i.e the array of products 
+            const res = await axios.get(url);
+            const products = await res.data;
+            dispatch({ type: 'SET_API_DATA', payload: products });
+        } catch (error) {
+            dispatch({ type: 'API_ERROR' });
+        }
+
     }
 
+    // used useEffect hook for loading all the products details when the website is first loaded or started 
     useEffect(() => {
         getProducts(API);
     }, [])
 
-    return <AppContext.Provider value='ShopNest'>
+    // returning the initial state values to all the components of the project
+    return <AppContext.Provider value={{ ...state }}>
         {children}
     </AppContext.Provider>
 };
 
-
+// created a custom function which calls or returns AppContext 
+// this is intend to import less thing in the component where we have to use this context api
 const useProductContext = () => {
     return useContext(AppContext);
 }
 
+// exported 
 export { AppProvider, AppContext, useProductContext };
