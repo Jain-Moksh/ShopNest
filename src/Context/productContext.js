@@ -16,6 +16,8 @@ const initialState = {
     isError: false,
     products: [],
     featureProducts: [],
+    isSingleLoading: false,
+    singleProduct: {},
 };
 
 // defining the provider of the context api = AppContext 
@@ -40,16 +42,33 @@ const AppProvider = ({ children }) => {
         } catch (error) {
             dispatch({ type: 'API_ERROR' });
         }
+    };
 
+    // my 2nd api call for single product
+    const getSingleProduct = async(url) =>{
+
+        dispatch({ type: 'SET_SINGLE_LOADING' });
+
+        try{
+            // here res contains all the information of api including unnesecary
+            // here products has only the product information i.e the array of products 
+            const res = await axios.get(url);
+            const singleProduct = await res.data;
+            dispatch({type: 'SET_SINGLE_PRODUCT', payload: singleProduct })
+
+        } catch(error){
+            dispatch({ type: 'SET_SINGLE_ERROR' });
+        }
     }
 
     // used useEffect hook for loading all the products details when the website is first loaded or started 
     useEffect(() => {
         getProducts(API);
+        
     }, [])
 
     // returning the initial state values to all the components of the project
-    return <AppContext.Provider value={{ ...state }}>
+    return <AppContext.Provider value={{ ...state, getSingleProduct }}>
         {children}
     </AppContext.Provider>
 };
