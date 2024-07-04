@@ -1,0 +1,1 @@
+stars.jsx in components ka css
