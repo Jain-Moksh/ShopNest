@@ -99,6 +99,11 @@ function SingleProduct() {
                 Brand: <span>{company}</span>
               </p>
             </div>
+
+            <hr />
+            {/*  */}
+            {stock > 0 && <AddToCart product={singleProduct} />}
+
           </div>
 
         </div>
