@@ -21,6 +21,11 @@ const FilterContextProvider = ({ children }) => {
         return dispatch({ type: 'SET_GRID_VIEW' });
     }
 
+    // to set list view
+    const setListView = () => {
+        return dispatch({ type: 'SET_LIST_VIEW' });
+    }
+
     useEffect(() => {
         dispatch({ type: "LOAD_FILTER_PRDUCTS", payload: products })
     }, [products]);
@@ -28,7 +33,7 @@ const FilterContextProvider = ({ children }) => {
 
 
     return (
-        <FilterContext.Provider value={{ ...state, setGridView }} >
+        <FilterContext.Provider value={{ ...state, setGridView, setListView }} >
             {children}
         </FilterContext.Provider>
 

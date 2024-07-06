@@ -1,20 +1,24 @@
 import React from 'react';
 import styled from 'styled-components';
 import Product from './Product';
+import { useFilterContext } from '../Context/FilterContext';
 
 const GridView = ({ products }) => {
-    return (
-        <Wrapper classname="section">
-            <div className="container grid grid-three-column">
-                {
-                    products.map((currentElement, index) => {
-                        return <Product key={index} currentElement={currentElement} />
-                    })
-                }
-            </div>
 
-        </Wrapper>
-    )
+  // const { filterProducts } = useFilterContext();
+
+  return (
+    <Wrapper classname="section">
+      <div className="container grid grid-three-column">
+        {
+          products.map((currentElement) => {
+            return <Product key={currentElement.id} currentElement={currentElement} />
+          })
+        }
+      </div>
+
+    </Wrapper>
+  )
 }
 
 const Wrapper = styled.section`

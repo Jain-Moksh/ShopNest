@@ -21,7 +21,7 @@ const FeatureProduct = () => {
         <div className="grid grid-three-column">
           {
             featureProducts.map((currentElement) => {
-              return <Product key={currentElement.id} {...currentElement} />
+              return <Product key={currentElement.id} currentElement={currentElement} />
             })
           }
         </div>

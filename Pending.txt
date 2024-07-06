@@ -1,5 +1,3 @@
-stars.jsx in components ka css
+css of ListView.jsx in components
 
-addToCart.jsx in components ka css
-
-GridView.jsx in components ka css
+css of sort.jsx in components
