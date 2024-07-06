@@ -25,4 +25,4 @@ const Product = (currentElement) => {
     )
 }
 
-export default Product
+export default Product;

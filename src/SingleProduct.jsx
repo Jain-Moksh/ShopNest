@@ -9,6 +9,7 @@ import FormatPrice from './components/helpers/FormatPrice';
 import { TbReplace, TbTruckDelivery } from "react-icons/tb";
 import { MdSecurity } from "react-icons/md";
 import Stars from "./components/Stars";
+import AddToCart from "./components/AddToCart";
 
 
 function SingleProduct() {

@@ -1,7 +1,7 @@
 import React from 'react'
 import { FaMinus, FaPlus } from 'react-icons/fa'
 
-const cartQuantityToggle = ({ quantity, setDecrease, setIncrease }) => {
+const CartQuantityToggle = ({ quantity, setDecrease, setIncrease }) => {
     return (
         <div className="cart-button">
             <div className="amount-toggle">
@@ -13,4 +13,4 @@ const cartQuantityToggle = ({ quantity, setDecrease, setIncrease }) => {
     )
 }
 
-export default cartQuantityToggle;
+export default CartQuantityToggle;
