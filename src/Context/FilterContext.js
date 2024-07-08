@@ -8,6 +8,10 @@ const initialState = {
     filterProducts: [],
     allProducts: [],
     gridView: true,
+    sortingValue: 'lowest',
+    filters: {
+        text: ''
+    }
 }
 
 const FilterContextProvider = ({ children }) => {
@@ -19,12 +23,31 @@ const FilterContextProvider = ({ children }) => {
     // to set grid view
     const setGridView = () => {
         return dispatch({ type: 'SET_GRID_VIEW' });
-    }
+    };
 
     // to set list view
     const setListView = () => {
         return dispatch({ type: 'SET_LIST_VIEW' });
+    };
+
+    // this is sorting function for dropDown menu used in Sort.jsx file and in Products Page.
+    const sorting = (event) => {
+        let userValue = event.target.value;
+        dispatch({ type: 'GET_SORT_VALUE', payload: userValue });
+    };
+
+    // this is to update the search bar in file FilterSection.jsx used on page Products
+    const updateFilterValue = (event) => {
+        let name = event.target.name;
+        let value = event.target.value;
+
+        dispatch({ type: 'UPDATE_FILTERS_VALUE', payload: { name, value } });
     }
+
+    useEffect(() => {
+        dispatch({ type: 'SORTING_PRODUCTS' });
+        dispatch({type: 'FILTER_PRODUCT'});
+    }, [products, state.sortingValue, state.filters]);
 
     useEffect(() => {
         dispatch({ type: "LOAD_FILTER_PRDUCTS", payload: products })
@@ -33,7 +56,7 @@ const FilterContextProvider = ({ children }) => {
 
 
     return (
-        <FilterContext.Provider value={{ ...state, setGridView, setListView }} >
+        <FilterContext.Provider value={{ ...state, setGridView, setListView, sorting, updateFilterValue }} >
             {children}
         </FilterContext.Provider>
 

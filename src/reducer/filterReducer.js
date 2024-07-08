@@ -23,6 +23,71 @@ const filterReducer = (state, action) => {
                 gridView: false,
             }
 
+        case 'GET_SORT_VALUE':
+            // let userSortValue = document.getElementById('sort');
+            return {
+                ...state,
+                sortingValue: action.payload,
+            }
+
+        case 'SORTING_PRODUCTS':
+            const { filterProducts, sortingValue } = state;
+
+            let tempSortData = [filterProducts];
+
+            const sortingProducts = (a, b) => {
+                if (sortingValue === 'a-z') {
+                    return a.name.localeCompare(b.name);
+                };
+
+                if (sortingValue === 'z-a') {
+                    return b.name.localeCompare(a.name);
+                };
+                if (sortingValue === 'lowest') {
+                    return a.price - b.price;
+                };
+                if (sortingValue === 'highest') {
+                    return b.price - s.price;
+                };
+            };
+
+            let newSortData = tempSortData.sort(sortingProducts);
+
+            return {
+                ...state,
+                filterProducts: newSortData,
+            };
+
+        case 'UPDATE_FILTERS_VALUE':
+            const { name, value } = action.payload;
+
+            return {
+                ...state,
+                filters:
+                {
+                    ...state.filters,
+                    [name]: value,
+                }
+            }
+
+        case 'FILTER_PRODUCT':
+            let { allProducts } = state;
+            let tempProducts = [...allProducts];
+
+            const { text } = state.filters;
+
+            if (text) {
+                tempProducts: tempProducts.filter((currentElement) => {
+                    return currentElement.name.toLowerCase().includes(text);
+                });
+            }
+
+            return {
+                ...state,
+                filterProducts: tempProducts,
+            };
+
+
         default:
             return state;
     }
