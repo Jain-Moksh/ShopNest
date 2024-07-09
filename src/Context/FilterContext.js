@@ -37,7 +37,13 @@ const FilterContextProvider = ({ children }) => {
     const sorting = (event) => {
         let userValue = event.target.value;
         dispatch({ type: 'GET_SORT_VALUE', payload: userValue });
+        dispatch({ type: 'SORTING_PRODUCTS' });
     };
+
+    // const sorting = (event) => {
+    //     let userValue = event.target.value;
+    //     dispatch({ type: "GET_SORT_VALUE", payload: userValue });
+    //   };
 
     // this is to update the search bar in file FilterSection.jsx used on page Products
     const updateFilterValue = (event) => {

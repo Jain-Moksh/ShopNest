@@ -33,7 +33,7 @@ const filterReducer = (state, action) => {
         case 'SORTING_PRODUCTS':
             const { filterProducts, sortingValue } = state;
 
-            let tempSortData = [filterProducts];
+            let tempSortData = [...filterProducts];
 
             const sortingProducts = (a, b) => {
                 if (sortingValue === 'a-z') {
@@ -47,7 +47,7 @@ const filterReducer = (state, action) => {
                     return a.price - b.price;
                 };
                 if (sortingValue === 'highest') {
-                    return b.price - s.price;
+                    return b.price - a.price;
                 };
             };
 
@@ -77,25 +77,25 @@ const filterReducer = (state, action) => {
             const { text, category, company, colors } = state.filters;
 
             if (text) {
-                tempProducts: tempProducts.filter((currentElement) => {
+                tempProducts = tempProducts.filter((currentElement) => {
                     return currentElement.name.toLowerCase().includes(text);
                 });
             }
 
-            if (category != 'all') {
-                tempProducts: tempProducts.filter((currentElement) => {
+            if (category !== 'all') {
+                tempProducts = tempProducts.filter((currentElement) => {
                     return currentElement.category.toLowerCase() === category.toLowerCase();
                 })
             }
 
-            if (company != 'all') {
-                tempProducts: tempProducts.filter((currentElement) => {
+            if (company !== 'all') {
+                tempProducts = tempProducts.filter((currentElement) => {
                     return currentElement.company.toLowerCase() === company.toLowerCase();
                 })
             }
 
-            if (colors) {
-                tempProducts: tempProducts.filter((currentElement) => {
+            if (colors !== 'all') {
+                tempProducts = tempProducts.filter((currentElement) => {
                     currentElement.colors.includes(colors);
                 })
             }
