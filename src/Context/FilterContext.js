@@ -10,7 +10,10 @@ const initialState = {
     gridView: true,
     sortingValue: 'lowest',
     filters: {
-        text: ''
+        text: '',
+        category: 'all',
+        company: 'all',
+        colors: 'all',
     }
 }
 
@@ -46,7 +49,7 @@ const FilterContextProvider = ({ children }) => {
 
     useEffect(() => {
         dispatch({ type: 'SORTING_PRODUCTS' });
-        dispatch({type: 'FILTER_PRODUCT'});
+        dispatch({ type: 'FILTER_PRODUCT' });
     }, [products, state.sortingValue, state.filters]);
 
     useEffect(() => {
