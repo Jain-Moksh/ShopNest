@@ -4,8 +4,12 @@ import styled from 'styled-components';
 import CartQuantityToggle from './CartQuantityToggle';
 import { NavLink } from 'react-router-dom';
 import { Button } from '../styles/Button';
+import { useCartContext } from '../Context/CartContext';
 
+// this is called in SingleProduct.jsx page
 const AddToCart = ({ product }) => {
+
+  const { addToCart } = useCartContext();
 
   const { id, colors, stock } = product;
   const [color, setColor] = useState(colors[0]);
@@ -16,9 +20,9 @@ const AddToCart = ({ product }) => {
   };
 
   const setIncrease = () => {
-    const setDecrease = () => {
-      quantity < stock ? setQuantity(quantity + 1) : setQuantity(quantity);
-    };
+
+    quantity < stock ? setQuantity(quantity + 1) : setQuantity(quantity);
+
   };
 
 
@@ -46,13 +50,15 @@ const AddToCart = ({ product }) => {
         setDecrease={setDecrease}
         setIncrease={setIncrease} />
 
-      <NavLink to='/cart' >
+      <NavLink to='/cart' onClick={() => { addToCart(id, color, quantity) }}>
+
         <Button className='btn'>Add To Cart</Button>
       </NavLink>
 
     </Wrapper>
   )
 }
+
 
 const Wrapper = styled.section`
   .colors p {

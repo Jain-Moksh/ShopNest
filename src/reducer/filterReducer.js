@@ -106,22 +106,42 @@ const filterReducer = (state, action) => {
             }
 
             // agar naa chale toh ek baar price normal rakhna yani === 0 ko nikal dena and else part ka inner protion ko if k inner portion mein rakhna 
-            if (price === 0) {
+            if (price) {
+
                 tempProducts = tempProducts.filter((currentElement) => {
-                    currentElement.price == price;
+                    return currentElement.price <= price;
+
+                    // tempProducts = tempProducts.filter((currentElement) => {
+                    //     currentElement.price == price;
                 });
             } else {
-
                 tempProducts = tempProducts.filter((currentElement) => {
-                    currentElement.price <= price;
+                    return currentElement.price == price;
+
+                    // tempProducts = tempProducts.filter((currentElement) => {
+                    //     currentElement.price <= price;
                 });
             }
-
 
             return {
                 ...state,
                 filterProducts: tempProducts,
             };
+
+        case 'CLEAR_FILTERS':
+            return {
+                ...state,
+                filters: {
+                    ...state.filters,
+                    text: '',
+                    category: 'all',
+                    company: 'all',
+                    colors: 'all',
+                    maxPrice: 0,
+                    price: state.filters.maxPrice,
+                    minPrice: state.filters.maxPrice,
+                },
+            }
 
 
         default:

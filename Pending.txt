@@ -1,4 +1,4 @@
 
 in sort.jsx file mein search ka icon add krna hai instead of Ab 
 
-filterReducer page mein aur filterContext page mein changes hai so update karna 
+add styled css in cart.jsx file
