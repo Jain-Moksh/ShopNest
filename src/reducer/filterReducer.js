@@ -5,10 +5,15 @@ const filterReducer = (state, action) => {
     switch (action.type) {
 
         case 'LOAD_FILTER_PRDUCTS':
+            let priceArr = action.payload.map((currentElement) => currentElement.price);
+
+            let maxPrice = Math.max(...priceArr);
+
             return {
                 ...state,
                 filterProducts: [...action.payload],
                 allProducts: [...action.payload],
+                filters: { ...state.filters, maxPrice, price: maxPrice },
             }
 
         case 'SET_GRID_VIEW':
@@ -74,7 +79,7 @@ const filterReducer = (state, action) => {
             let { allProducts } = state;
             let tempProducts = [...allProducts];
 
-            const { text, category, company, colors } = state.filters;
+            const { text, category, company, colors, price } = state.filters;
 
             if (text) {
                 tempProducts = tempProducts.filter((currentElement) => {
@@ -99,6 +104,19 @@ const filterReducer = (state, action) => {
                     currentElement.colors.includes(colors);
                 })
             }
+
+            // agar naa chale toh ek baar price normal rakhna yani === 0 ko nikal dena and else part ka inner protion ko if k inner portion mein rakhna 
+            if (price === 0) {
+                tempProducts = tempProducts.filter((currentElement) => {
+                    currentElement.price == price;
+                });
+            } else {
+
+                tempProducts = tempProducts.filter((currentElement) => {
+                    currentElement.price <= price;
+                });
+            }
+
 
             return {
                 ...state,

@@ -2,10 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import { useFilterContext } from '../Context/FilterContext';
 import { FaCheck } from 'react-icons/fa';
+import FormatPrice from './helpers/FormatPrice';
 
 const FilterSection = () => {
 
-  const { filters: { text, category, company, colors }, updateFilterValue, allProducts } = useFilterContext();
+  const { filters: { text, category, company, colors, price, maxPrice, minPrice }, updateFilterValue, allProducts } = useFilterContext();
 
   // getUniqueData is the common function which returns the value of the property, which is passed where it is called, for each product
   const getUniqueData = (data, property) => {
@@ -104,6 +105,13 @@ const FilterSection = () => {
           }
         </div>
       </div>
+
+      <div className="filter_price">
+        <h3>Price</h3>
+        <p><FormatPrice price={price} /></p>
+        <input type="range" name='price' min={minPrice} max={maxPrice} value={price} onChange={updateFilterValue} />
+      </div>
+
     </Wrapper>
   )
 }

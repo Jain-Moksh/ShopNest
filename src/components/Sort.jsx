@@ -6,7 +6,7 @@ import { useFilterContext } from '../Context/FilterContext';
 
 const Sort = () => {
 
-  const { filterProducts, gridView, setGridView, setListView, sorting } = useFilterContext();
+  const { filterProducts, gridView, setGridView, setListView, sorting, initiateSort } = useFilterContext();
 
   return (
     <Wrapper className='sort-section'>
@@ -34,22 +34,29 @@ const Sort = () => {
       </div>
 
       {/* dropdown bar section */}
-      <div className="sort-selection">
-        <form action='#'>
-          <label htmlFor="sort"></label>
-          <select name="sort" id="sort" className='sort-selection--style' onClick={sorting}>
+      <div className='inline'>
+        <div className="sort-selection">
+          <form action='#'>
+            <label htmlFor="sort"></label>
+            <select name="sort" id="sort" className='sort-selection--style' onClick={sorting}>
 
-            <option value="lowest">Price(lowest)</option>
-            <option value="#" disabled></option>
-            <option value="highest">Price(highest)</option>
-            <option value="#" disabled></option>
-            <option value="a-z">Price(a-z)</option>
-            <option value="#" disabled></option>
-            <option value="z-a">Price(z-a)</option>
-            <option value="#" disabled></option>
+              <option value="lowest">Price(lowest)</option>
+              <option value="#" disabled></option>
+              <option value="highest">Price(highest)</option>
+              <option value="#" disabled></option>
+              <option value="a-z">Price(a-z)</option>
+              <option value="#" disabled></option>
+              <option value="z-a">Price(z-a)</option>
+              <option value="#" disabled></option>
 
-          </select>
-        </form>
+            </select>
+          </form>
+        </div>
+        <div className='search'>
+          <button onClick={initiateSort}>
+            <h4>Ab</h4>
+          </button>
+        </div>
       </div>
 
 
@@ -84,6 +91,18 @@ const Wrapper = styled.section`
       color: #fff;
     }
   }
+
+ .inline {
+    display: flex;
+    justify-content: center;
+
+ }
+    .search {
+    margin-left: 10px;
+    border: 5px; 
+    }
+
+
 
   .sort-selection .sort-selection--style {
     padding: 0.5rem;
