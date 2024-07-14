@@ -8,18 +8,19 @@ const CartItem = ({ product }) => {
 
     const { id, name, image, color, price, quantity } = product;
 
+
     // const [quantity, setQuantity] = useState(1);
 
-    const { removeItem } = useCartContext();
+    const { removeItem, setDecrease, setIncrease } = useCartContext();
 
 
-    const setDecrease = () => {
-        // quantity > 1 ? setQuantity(quantity - 1) : setQuantity(1);
-    };
+    // const setDecrease = () => {
+    //     // quantity > 1 ? setQuantity(quantity - 1) : setQuantity(1);
+    // };
 
-    const setIncrease = () => {
-        // quantity < stock ? setQuantity(quantity + 1) : setQuantity(quantity);
-    };
+    // const setIncrease = () => {
+    //     // quantity < stock ? setQuantity(quantity + 1) : setQuantity(quantity);
+    // };
 
 
 
@@ -50,8 +51,8 @@ const CartItem = ({ product }) => {
 
             <CartQuantityToggle
                 quantity={quantity}
-                setDecrease={setDecrease}
-                setIncrease={setIncrease} />
+                setDecrease={() => setDecrease(id)}
+                setIncrease={() => setIncrease(id)} />
 
             <div className="cart-hide">
                 <p><FormatPrice price={price * quantity} /></p>

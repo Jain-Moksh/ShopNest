@@ -38,13 +38,21 @@ const CartProvider = ({ children }) => {
         dispatch({ type: 'CLEAR_CART' });
     }
 
+    const setDecrease = (id) => {
+        dispatch({type: 'SET_DECREMENT', payload: id});
+    }
+
+    const setIncrease = (id) => {
+        dispatch({type: 'SET_INCREMENT', payload: id});
+    }
+
     // to add data in local storage
     useEffect(() => {
         localStorage.setItem("ShopNestCart", JSON.stringify(state.cart));
     }, [state.cart]);
 
 
-    return <CartContext.Provider value={{ ...state, addToCart, removeItem, clearCart }} >
+    return <CartContext.Provider value={{ ...state, addToCart, removeItem, clearCart, setIncrease, setDecrease }} >
         {children}
     </CartContext.Provider >;
 };
