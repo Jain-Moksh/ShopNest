@@ -6,9 +6,9 @@ import { useCartContext } from '../Context/CartContext';
 
 const CartItem = ({ product }) => {
 
-    const {id, name, image, color, price, quantity} = product;
+    const { id, name, image, color, price, quantity } = product;
 
-    console.log(name);
+    // const [quantity, setQuantity] = useState(1);
 
     const { removeItem } = useCartContext();
 
@@ -18,10 +18,10 @@ const CartItem = ({ product }) => {
     };
 
     const setIncrease = () => {
-        const setDecrease = () => {
-            // quantity < stock ? setQuantity(quantity + 1) : setQuantity(quantity);
-        };
+        // quantity < stock ? setQuantity(quantity + 1) : setQuantity(quantity);
     };
+
+
 
     return (
         <div className='cart-heading grid grid-five-column'>
