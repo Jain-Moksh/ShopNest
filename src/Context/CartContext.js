@@ -18,8 +18,8 @@ const initialState = {
     // cart: [],
     cart: getLocalCartData(),
     totalItem: '',
-    totalAmount: '',
-    shippingFees: '',
+    totalPrice: '',
+    shippingFees: 50000,
 }
 
 const CartProvider = ({ children }) => {
@@ -48,6 +48,8 @@ const CartProvider = ({ children }) => {
 
     // to add data in local storage
     useEffect(() => {
+        dispatch({type: 'CART_TOTAL_ITEM'});
+        dispatch({type: 'CART_TOTAL_PRICE'});
         localStorage.setItem("ShopNestCart", JSON.stringify(state.cart));
     }, [state.cart]);
 

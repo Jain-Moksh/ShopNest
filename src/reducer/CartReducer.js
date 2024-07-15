@@ -115,6 +115,31 @@ const CartReducer = (state, action) => {
                 cart: updatedProductIncrement,
             }
 
+        case 'CART_TOTAL_ITEM':
+            let updatedTotalItem = state.cart.reduce((accumulator, currentElement) => {
+                let { quantity } = currentElement;
+                accumulator = accumulator + quantity;
+                return accumulator;
+            }, 0);
+
+            return {
+                ...state,
+                totalItem: updatedTotalItem,
+            }
+
+        case 'CART_TOTAL_PRICE':
+            // let {totalPrice} = state;
+            let total_price = state.cart.reduce((accumulator, currentElement) => {
+                const { quantity, price } = currentElement;
+                accumulator = accumulator + (quantity * price);
+                return accumulator;
+            }, 0);
+
+            return {
+                ...state,
+                totalPrice: total_price,
+            }
+
         default:
             return {
                 ...state,
